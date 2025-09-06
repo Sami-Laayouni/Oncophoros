@@ -9,3 +9,5 @@ pyarrow
 fastparquet
 gradio
 seaborn
+
+dna_features_viewer
