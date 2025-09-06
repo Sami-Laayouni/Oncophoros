@@ -11,13 +11,16 @@ This Python project contains three separate models for testing classification be
   - `Non-Viral.tsv`
 
 - **lightgbm_version/**  
-  Implementation using **LightGBM** (open-source by Microsoft).
+  Implementation using **LightGBM** (open-source by Microsoft). This is also the main file with most of the comments (as the other programs share the same component)
 
 - **logistic_regression/**  
   Implementation using Logistic Regression.
 
 - **random_forest/**  
   Implementation using Random Forest.
+
+- **user_interface/**
+  A Simple Gradio user-interface to be able to compare the accuracy of each model.
 
 ## Usage
 

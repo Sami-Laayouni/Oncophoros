@@ -8,3 +8,4 @@ shap
 pyarrow
 fastparquet
 gradio
+seaborn

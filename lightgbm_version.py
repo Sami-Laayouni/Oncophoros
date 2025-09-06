@@ -1,4 +1,3 @@
-
 """
 HBV vs Non-Viral classifier using the LightGBM model
 """
@@ -15,11 +14,12 @@ from sklearn.metrics import (
     roc_auc_score, average_precision_score, f1_score, accuracy_score,
     confusion_matrix, roc_curve, precision_recall_curve
 )
-from sklearn.calibration import CalibratedClassifierCV
+from sklearn.calibration import CalibratedClassifierCV, calibration_curve
 
 
 import matplotlib.pyplot as plt
 import joblib
+import seaborn as sns
 import lightgbm as lgb
 
 # ---------------- CONFIG VARIABLES ----------------
@@ -32,6 +32,9 @@ VAL_SIZE  = 0.20 # Portion of training set to use as validation set (set as a va
 SEED = 42  # Random seed for reproducibility
 TOPK = 20 # Number of top features to save based on importance
 # ---------------------------------------------------
+
+# ---------------- IMPORTANT FUNCTIONS (Just Copied and Pasted Between Files) ----------------
+
 
 # This function ensures the output directory exists or creates it if it doesn't.
 def ensure_dir(d):
@@ -74,7 +77,7 @@ def compute_balanced_sample_weights(y):
     return weights * (n / weights.sum()) # Normalization to keep the sum of weights equal to n
 
 """
-Function to choose the best threshold based on F1 score from precision-recall curve.
+Find the best threshold based on F1 score from precision-recall curve.
 Try all possible thresholds for turning probabilities into 0/1 predictions. 
 Pick the one that makes the F1 score the highest
 """
@@ -91,6 +94,109 @@ def threshold(y_true, y_proba):
             best_thr = thr  
     return best_thr, best_score
 
+def ensure_patient_separation(all_df, test_size, val_size, seed):
+    """
+    Ensure patients are unique to train/validation or test - never both.
+    Prevents class leakage by splitting on patients, not individual samples.
+    """
+    # Get unique patients and their labels
+    patient_labels = all_df.groupby('Case')['is_HBV'].first()
+    unique_cases = patient_labels.index.tolist()
+    unique_labels = patient_labels.values
+    
+    # Split patients (not samples) into train/test
+    cases_train, cases_test, _, _ = train_test_split(
+        unique_cases, unique_labels, 
+        test_size=test_size, 
+        stratify=unique_labels, 
+        random_state=seed
+    )
+    
+    # Further split training patients into train/val
+    labels_train = [patient_labels[case] for case in cases_train]
+    cases_tr, cases_val, _, _ = train_test_split(
+        cases_train, labels_train,
+        test_size=val_size,
+        stratify=labels_train,
+        random_state=seed
+    )
+    
+    # Create masks for the original dataframe
+    train_mask = all_df['Case'].isin(cases_tr)
+    val_mask = all_df['Case'].isin(cases_val)
+    test_mask = all_df['Case'].isin(cases_test)
+    
+    return train_mask, val_mask, test_mask
+
+def plot_confusion_matrix(cm, out_dir):
+    """Plot and save confusion matrix heatmap"""
+    plt.figure(figsize=(6, 5))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
+                xticklabels=['Non-Viral', 'HBV'], 
+                yticklabels=['Non-Viral', 'HBV'])
+    plt.title('Confusion Matrix')
+    plt.ylabel('True Label')
+    plt.xlabel('Predicted Label')
+    plt.tight_layout()
+    plt.savefig(os.path.join(out_dir, "confusion_matrix_plot.png"))
+    plt.close()
+
+def plot_calibration_curve(y_true, y_proba, out_dir):
+    """Plot calibration curve to assess probability calibration"""
+    fraction_of_positives, mean_predicted_value = calibration_curve(
+        y_true, y_proba, n_bins=10, strategy='uniform'
+    )
+    
+    plt.figure(figsize=(6, 5))
+    plt.plot(mean_predicted_value, fraction_of_positives, "s-", 
+             label="Calibrated Model", color='blue', markersize=8)
+    plt.plot([0, 1], [0, 1], "k:", label="Perfectly calibrated", linewidth=2)
+    plt.xlabel('Mean Predicted Probability')
+    plt.ylabel('Fraction of Positives')
+    plt.title('Calibration Curve')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig(os.path.join(out_dir, "calibration_curve.png"))
+    plt.close()
+
+def create_all_plots(y_test, test_proba, test_pred, out_dir):
+    """Create all required plots"""
+    # ROC Curve
+    auc = roc_auc_score(y_test, test_proba)
+    fpr, tpr, _ = roc_curve(y_test, test_proba)
+    plt.figure(figsize=(6, 5))
+    plt.plot(fpr, tpr, lw=2, label=f"AUC={auc:.3f}")
+    plt.plot([0, 1], [0, 1], linestyle="--", color='gray')
+    plt.xlabel("False Positive Rate")
+    plt.ylabel("True Positive Rate")
+    plt.title("ROC Curve (Test)")
+    plt.legend(loc="lower right")
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig(os.path.join(out_dir, "roc_curve.png"))
+    plt.close()
+
+    # Precision-Recall Curve
+    ap = average_precision_score(y_test, test_proba)
+    prec, rec, _ = precision_recall_curve(y_test, test_proba)
+    plt.figure(figsize=(6, 5))
+    plt.plot(rec, prec, lw=2, label=f"PR-AUC={ap:.3f}")
+    plt.xlabel("Recall")
+    plt.ylabel("Precision")
+    plt.title("Precision-Recall Curve")
+    plt.legend(loc="lower left")
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig(os.path.join(out_dir, "pr_curve.png"))
+    plt.close()
+
+    # Confusion Matrix Plot
+    cm = confusion_matrix(y_test, test_pred)
+    plot_confusion_matrix(cm, out_dir)
+    
+    # Calibration Curve
+    plot_calibration_curve(y_test, test_proba, out_dir)
 
 def main():
     ensure_dir(OUT_DIR)
@@ -130,6 +236,7 @@ def main():
     X = X.loc[keep_mask].reset_index(drop=True)
     y = y.loc[keep_mask].reset_index(drop=True)
     cases = cases.loc[keep_mask].reset_index(drop=True)
+    all_df = all_df.loc[keep_mask].reset_index(drop=True)  # Update all_df too for patient separation
 
     # Impute remaining missing values with median of each feature (We are using median as supposed to mean in order to account for outliers)
     X = X.fillna(X.median())
@@ -157,25 +264,41 @@ def main():
 
     if y.nunique() < 2:
         raise ValueError("Need both classes present after processing.")
-
-
+    
+    # Ensure patients are unique to train/val or test - prevent class leakage
+    print("Splitting data while ensuring patient separation...")
+    train_mask, val_mask, test_mask = ensure_patient_separation(
+        all_df, TEST_SIZE, VAL_SIZE, SEED
+    )
+    
     """ 
     Now we will split the data into training, validation, and test sets. 
     We will use stratified splitting to ensure that the class distribution is maintained 
-    in each set. 
+    in each set. We will also verify that there is no patient overlap between the sets to prevent data leakage.
     """
+    X_train = X.loc[train_mask].reset_index(drop=True)
+    y_train = y.loc[train_mask].reset_index(drop=True)
+    
+    X_val = X.loc[val_mask].reset_index(drop=True)
+    y_val = y.loc[val_mask].reset_index(drop=True)
+    
+    X_test = X.loc[test_mask].reset_index(drop=True)
+    y_test = y.loc[test_mask].reset_index(drop=True)
+    
+    print(f"Patient separation - Train: {X_train.shape}, Val: {X_val.shape}, Test: {X_test.shape}")
+    
+    # Verify no patient overlap
+    train_patients = set(all_df.loc[train_mask, 'Case'].values)
+    val_patients = set(all_df.loc[val_mask, 'Case'].values)
+    test_patients = set(all_df.loc[test_mask, 'Case'].values)
+    
+    assert len(train_patients & test_patients) == 0, "Patient leakage detected: train/test overlap!"
+    assert len(val_patients & test_patients) == 0, "Patient leakage detected: val/test overlap!"
+    print("✓ No patient leakage detected")
 
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=TEST_SIZE, stratify=y, random_state=SEED
-    )
-    X_tr, X_val, y_tr, y_val = train_test_split(
-        X_train, y_train, test_size=VAL_SIZE, stratify=y_train, random_state=SEED
-    )
-    # Final shapes (reference and debugging)
-    print(f"Split into Train: {X_tr.shape}, Val: {X_val.shape}, Test: {X_test.shape}")
 
     # Compute balanced sample weights for training set
-    w_tr = compute_balanced_sample_weights(y_tr)
+    w_tr = compute_balanced_sample_weights(y_train)
 
     """
     This file is using the last method (LightGBM). The benefits to using this model include: 
@@ -214,7 +337,7 @@ def main():
     training if the validation AUC does not improve for 200 consecutive rounds.
     """
     clf.fit(
-        X_tr, y_tr,
+        X_train, y_train,
         sample_weight=w_tr,
         eval_set=[(X_val, y_val)],
         eval_metric="auc",
@@ -286,33 +409,13 @@ def main():
     fi.head(TOPK).to_csv(os.path.join(OUT_DIR, f"top{TOPK}_features.csv"), index=False)
 
     # ---- Plots ----
-    fpr, tpr, _ = roc_curve(y_test, test_proba)
-    plt.figure(figsize=(6, 5))
-    plt.plot(fpr, tpr, lw=2, label=f"AUC={auc:.3f}")
-    plt.plot([0, 1], [0, 1], linestyle="--")
-    plt.xlabel("False Positive Rate")
-    plt.ylabel("True Positive Rate")
-    plt.title("ROC Curve (Test)")
-    plt.legend(loc="lower right")
-    plt.grid(True)
-    plt.tight_layout()
-    plt.savefig(os.path.join(OUT_DIR, "roc_curve.png"))
-    plt.close()
+    print("Creating plots...")
+    create_all_plots(y_test, test_proba, test_pred, OUT_DIR)
 
-    prec, rec, _ = precision_recall_curve(y_test, test_proba)
-    plt.figure(figsize=(6, 5))
-    plt.plot(rec, prec, lw=2, label=f"PR-AUC={ap:.3f}")
-    plt.xlabel("Recall")
-    plt.ylabel("Precision")
-    plt.title("Precision–Recall Curve (LightGBM Version)")
-    plt.legend(loc="lower left")
-    plt.grid(True)
-    plt.tight_layout()
-    plt.savefig(os.path.join(OUT_DIR, "pr_curve.png"))
-    plt.close()
-
+    # Save predictions
+    test_cases = cases.loc[test_mask].reset_index(drop=True)
     out_pred = pd.DataFrame({
-        "Case": cases.loc[X_test.index].values,
+        "Case": test_cases.values,
         "y_true": y_test.values,
         "y_proba": test_proba,
         "y_pred": test_pred
@@ -324,10 +427,15 @@ def main():
             "metrics": metrics,
             "class_counts_total": all_df["is_HBV"].value_counts().to_dict(),
             "class_counts_after_filters": y.value_counts().to_dict(),
-            "top_features": fi.head(TOPK).to_dict(orient="records")
+            "top_features": fi.head(TOPK).to_dict(orient="records"),
+            "patient_splits": {
+                "train_patients": len(train_patients),
+                "val_patients": len(val_patients), 
+                "test_patients": len(test_patients)
+            }
         }, f, indent=2)
 
-    print("All done. Outputs in:", os.path.abspath(OUT_DIR))
+
 
 if __name__ == "__main__":
     main()

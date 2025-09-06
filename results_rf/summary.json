@@ -1,10 +1,10 @@
 {
   "metrics": {
-    "ROC-AUC": 0.9696969696969697,
-    "PR-AUC": 0.9791305219876647,
-    "F1": 0.9090909090909091,
-    "Accuracy": 0.9047619047619048,
-    "BestThreshold(F1)": 0.38709040294911307,
+    "ROC-AUC": 0.904040404040404,
+    "PR-AUC": 0.9394176047536001,
+    "F1": 0.8484848484848485,
+    "Accuracy": 0.8412698412698413,
+    "BestThreshold(F1)": 0.29401752518053875,
     "Calibrated": true,
     "Model": "RandomForest"
   },
@@ -18,84 +18,89 @@
   },
   "top_features": [
     {
+      "feature": "MT1H",
+      "importance": 0.017612819622525384
+    },
+    {
       "feature": "MGLL",
-      "importance": 0.02022755321898608
-    },
-    {
-      "feature": "AFP",
-      "importance": 0.016332963294602182
-    },
-    {
-      "feature": "MT1M",
-      "importance": 0.014711309326391465
-    },
-    {
-      "feature": "HBB",
-      "importance": 0.014572051408096387
+      "importance": 0.01732407244371093
     },
     {
       "feature": "GPC6",
-      "importance": 0.011658765289171164
+      "importance": 0.016277211741817618
+    },
+    {
+      "feature": "MT1M",
+      "importance": 0.01602923318945957
+    },
+    {
+      "feature": "HBB",
+      "importance": 0.015313176442722098
+    },
+    {
+      "feature": "CYP1A1",
+      "importance": 0.0115720967636483
     },
     {
       "feature": "SNX7",
-      "importance": 0.009050216187529943
-    },
-    {
-      "feature": "METRN",
-      "importance": 0.00828844573668279
-    },
-    {
-      "feature": "ISLR",
-      "importance": 0.008085989320323738
-    },
-    {
-      "feature": "FTL",
-      "importance": 0.0077427103110847065
-    },
-    {
-      "feature": "ATP2B2",
-      "importance": 0.007559491019334939
-    },
-    {
-      "feature": "KLF15",
-      "importance": 0.00748668657227006
-    },
-    {
-      "feature": "PMEPA1",
-      "importance": 0.006439209410539131
-    },
-    {
-      "feature": "DCN",
-      "importance": 0.006408144308324301
-    },
-    {
-      "feature": "PEG10",
-      "importance": 0.006395549665420843
-    },
-    {
-      "feature": "MT1H",
-      "importance": 0.00581203855220122
-    },
-    {
-      "feature": "ST3GAL1",
-      "importance": 0.005455603685102411
+      "importance": 0.009645233327297319
     },
     {
       "feature": "CDKN1C",
-      "importance": 0.005308263955280438
+      "importance": 0.00918758492306264
     },
     {
-      "feature": "TPX2",
-      "importance": 0.005262658222761493
+      "feature": "MYL9",
+      "importance": 0.009151349116891956
     },
     {
-      "feature": "HMGA1",
-      "importance": 0.005239163768222346
+      "feature": "PEG10",
+      "importance": 0.008729447681404393
     },
     {
-      "feature": "LRRC3",
-      "importance": 0.005049498619353583
+      "feature": "AFP",
+      "importance": 0.007551816409238256
+    },
+    {
+      "feature": "PMEPA1",
+      "importance": 0.007407595691738953
+    },
+    {
+      "feature": "DTX4",
+      "importance": 0.006733518825673548
+    },
+    {
+      "feature": "RAB34",
+      "importance": 0.006727832928169154
+    },
+    {
+      "feature": "ZNF331",
+      "importance": 0.006376530025265492
+    },
+    {
+      "feature": "ALDH3A1",
+      "importance": 0.006236160807495726
+    },
+    {
+      "feature": "MATN2",
+      "importance": 0.005999216725495647
+    },
+    {
+      "feature": "SERPINA1",
+      "importance": 0.005908878682306974
+    },
+    {
+      "feature": "HMOX1",
+      "importance": 0.005677967861122889
+    },
+    {
+      "feature": "ATP2B2",
+      "importance": 0.005583178232381262
     }
-  ]
+  ],
+  "patient_splits": {
+    "train_patients": 132,
+    "val_patients": 34,
+    "test_patients": 56
+  }
 }

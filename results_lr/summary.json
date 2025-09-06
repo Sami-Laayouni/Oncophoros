@@ -1,11 +1,12 @@
 {
   "metrics": {
-    "ROC-AUC": 0.9131313131313131,
-    "PR-AUC": 0.940894737843402,
-    "F1": 0.8571428571428571,
-    "Accuracy": 0.8571428571428571,
-    "BestThreshold(F1)": 0.4806732523347353,
-    "Calibrated": true
+    "ROC-AUC": 0.8999999999999999,
+    "PR-AUC": 0.9426338611814054,
+    "F1": 0.8852459016393442,
+    "Accuracy": 0.8888888888888888,
+    "BestThreshold(F1)": 0.5117037710477537,
+    "Calibrated": true,
+    "Model": "LogisticRegression"
   },
   "class_counts_total": {
     "1": 130,
@@ -17,84 +18,89 @@
   },
   "top_features": [
     {
-      "feature": "ARHGEF16",
-      "abs_coeff": 0.2755883538988813
+      "feature": "CYP2D6",
+      "abs_coeff": 0.20707220074817062
+    },
+    {
+      "feature": "CCL21",
+      "abs_coeff": 0.1836347310433532
+    },
+    {
+      "feature": "ADM2",
+      "abs_coeff": 0.17587189133582712
     },
     {
       "feature": "PTK6",
-      "abs_coeff": 0.24896869827149934
-    },
-    {
-      "feature": "FCAMR",
-      "abs_coeff": 0.24882961035926304
-    },
-    {
-      "feature": "CCNE1",
-      "abs_coeff": 0.2115500915831953
-    },
-    {
-      "feature": "PHLDA1",
-      "abs_coeff": 0.19554169579262767
+      "abs_coeff": 0.1626772308235698
     },
     {
       "feature": "ENTPD5",
-      "abs_coeff": 0.1865252518235335
+      "abs_coeff": 0.16093157777931608
     },
     {
-      "feature": "SYPL2",
-      "abs_coeff": 0.1794253700624198
-    },
-    {
-      "feature": "ACSM1",
-      "abs_coeff": 0.17154540036992383
-    },
-    {
-      "feature": "NCF2",
-      "abs_coeff": 0.17123843299621952
-    },
-    {
-      "feature": "F11",
-      "abs_coeff": 0.1690672285928838
-    },
-    {
-      "feature": "IRX3",
-      "abs_coeff": 0.16441901869098424
-    },
-    {
-      "feature": "ENPP3",
-      "abs_coeff": 0.16252493634619025
-    },
-    {
-      "feature": "TMOD1",
-      "abs_coeff": 0.1570787369794976
-    },
-    {
-      "feature": "ALDH1B1",
-      "abs_coeff": 0.1568318882433097
+      "feature": "FMO5",
+      "abs_coeff": 0.16041146335946863
     },
     {
       "feature": "ADH1C",
-      "abs_coeff": 0.15533146739952639
+      "abs_coeff": 0.15125066727152875
     },
     {
-      "feature": "SOAT2",
-      "abs_coeff": 0.15224632100645694
+      "feature": "ACSM1",
+      "abs_coeff": 0.14694850674465723
     },
     {
-      "feature": "PSAT1",
-      "abs_coeff": 0.15174500158724477
+      "feature": "SCNN1A",
+      "abs_coeff": 0.1450454903433872
+    },
+    {
+      "feature": "C4A",
+      "abs_coeff": 0.14482754768871797
+    },
+    {
+      "feature": "HLA-B",
+      "abs_coeff": 0.14067073133930097
+    },
+    {
+      "feature": "CAVIN2",
+      "abs_coeff": 0.13507860427920348
     },
     {
       "feature": "HLA-DMA",
-      "abs_coeff": 0.14891742523420048
+      "abs_coeff": 0.1347977237111618
     },
     {
-      "feature": "TPX2",
-      "abs_coeff": 0.14695884236944562
+      "feature": "PYCR1",
+      "abs_coeff": 0.13231879936117716
     },
     {
-      "feature": "PLAAT2",
-      "abs_coeff": 0.14679393348851738
+      "feature": "CFB",
+      "abs_coeff": 0.13205522669478342
+    },
+    {
+      "feature": "CCNE1",
+      "abs_coeff": 0.1319593477068299
+    },
+    {
+      "feature": "ENPP2",
+      "abs_coeff": 0.13171158164390007
+    },
+    {
+      "feature": "RBP7",
+      "abs_coeff": 0.13137435133617298
+    },
+    {
+      "feature": "AKR1B15",
+      "abs_coeff": 0.1300286797069821
+    },
+    {
+      "feature": "AP1M2",
+      "abs_coeff": 0.12971996422494517
     }
-  ]
+  ],
+  "patient_splits": {
+    "train_patients": 132,
+    "val_patients": 34,
+    "test_patients": 56
+  }
 }

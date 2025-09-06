@@ -1,13 +1,11 @@
 {
-  "metrics_expression_all": {
-    "ROC-AUC": 0.9525252525252524,
-    "PR-AUC": 0.972702094653314,
-    "F1": 0.9180327868852459,
-    "Accuracy": 0.9206349206349206,
-    "Precision": 1.0,
-    "Recall": 0.8484848484848485,
-    "BestThreshold(F1_on_val)": 0.8834302024619752,
-    "UsedEstimators": 98
+  "metrics": {
+    "ROC-AUC": 0.8979797979797979,
+    "PR-AUC": 0.9409019166870692,
+    "F1": 0.8484848484848485,
+    "Accuracy": 0.8412698412698413,
+    "BestThreshold(F1)": 0.37081458618365887,
+    "UsedEstimators": 93
   },
   "class_counts_total": {
     "1": 130,
@@ -17,107 +15,111 @@
     "1": 130,
     "0": 120
   },
-  "top_features_expression_all": [
-    {
-      "feature": "ATP2B2",
-      "gain_importance": 737.8899502754211,
-      "split_importance": 48
-    },
-    {
-      "feature": "F11",
-      "gain_importance": 454.4056668281555,
-      "split_importance": 21
-    },
-    {
-      "feature": "AFP",
-      "gain_importance": 258.80734157562256,
-      "split_importance": 14
-    },
+  "top_features": [
     {
       "feature": "MT1M",
-      "gain_importance": 248.95398950576782,
-      "split_importance": 9
+      "gain_importance": 480.4255259037018,
+      "split_importance": 19
     },
     {
-      "feature": "CFH",
-      "gain_importance": 101.07312965393066,
+      "feature": "ATP2B2",
+      "gain_importance": 371.8736615180969,
+      "split_importance": 26
+    },
+    {
+      "feature": "MT1H",
+      "gain_importance": 253.69559860229492,
       "split_importance": 8
     },
     {
-      "feature": "MGLL",
-      "gain_importance": 90.83930015563965,
-      "split_importance": 5
+      "feature": "RBP4",
+      "gain_importance": 147.8527787923813,
+      "split_importance": 11
     },
     {
-      "feature": "CYP2D6",
-      "gain_importance": 81.38372993469238,
-      "split_importance": 9
-    },
-    {
-      "feature": "PLA2G12B",
-      "gain_importance": 54.4651420712471,
-      "split_importance": 7
-    },
-    {
-      "feature": "MCHR1",
-      "gain_importance": 50.7007999420166,
-      "split_importance": 4
-    },
-    {
-      "feature": "FMO4",
-      "gain_importance": 48.27388000488281,
-      "split_importance": 4
-    },
-    {
-      "feature": "HBB",
-      "gain_importance": 37.958460569381714,
-      "split_importance": 3
-    },
-    {
-      "feature": "ISLR",
-      "gain_importance": 30.389639854431152,
-      "split_importance": 4
-    },
-    {
-      "feature": "F7",
-      "gain_importance": 23.912790060043335,
-      "split_importance": 4
-    },
-    {
-      "feature": "CD7",
-      "gain_importance": 22.754759788513184,
+      "feature": "C3",
+      "gain_importance": 96.47649765014648,
       "split_importance": 3
     },
     {
       "feature": "KLF15",
-      "gain_importance": 20.770359992980957,
+      "gain_importance": 89.37610149383545,
+      "split_importance": 4
+    },
+    {
+      "feature": "PMEPA1",
+      "gain_importance": 71.98270976543427,
+      "split_importance": 8
+    },
+    {
+      "feature": "PEG10",
+      "gain_importance": 61.91776943206787,
+      "split_importance": 7
+    },
+    {
+      "feature": "CYP2A7",
+      "gain_importance": 58.28099012374878,
+      "split_importance": 11
+    },
+    {
+      "feature": "GPC6",
+      "gain_importance": 54.93030071258545,
+      "split_importance": 3
+    },
+    {
+      "feature": "CYP27A1",
+      "gain_importance": 54.662439823150635,
+      "split_importance": 6
+    },
+    {
+      "feature": "SERPINA10",
+      "gain_importance": 53.98225975036621,
+      "split_importance": 5
+    },
+    {
+      "feature": "CYP2D6",
+      "gain_importance": 49.87539052963257,
+      "split_importance": 6
+    },
+    {
+      "feature": "ADM2",
+      "gain_importance": 47.31219959259033,
+      "split_importance": 3
+    },
+    {
+      "feature": "F10",
+      "gain_importance": 44.282999992370605,
+      "split_importance": 4
+    },
+    {
+      "feature": "APOB",
+      "gain_importance": 43.50122928619385,
+      "split_importance": 4
+    },
+    {
+      "feature": "COL6A2",
+      "gain_importance": 40.93613958358765,
+      "split_importance": 4
+    },
+    {
+      "feature": "SNX7",
+      "gain_importance": 39.2121000289917,
       "split_importance": 2
     },
     {
-      "feature": "TNFRSF11B",
-      "gain_importance": 19.508630752563477,
-      "split_importance": 2
+      "feature": "MAT1A",
+      "gain_importance": 36.47086048126221,
+      "split_importance": 3
     },
     {
-      "feature": "ABCG8",
-      "gain_importance": 18.689260005950928,
-      "split_importance": 2
-    },
-    {
-      "feature": "MT1H",
-      "gain_importance": 15.546819686889648,
-      "split_importance": 2
-    },
-    {
-      "feature": "ZFP36L2",
-      "gain_importance": 14.929400444030762,
-      "split_importance": 1
-    },
-    {
-      "feature": "ABCG5",
-      "gain_importance": 14.622020244598389,
-      "split_importance": 2
+      "feature": "RARRES2",
+      "gain_importance": 34.577680587768555,
+      "split_importance": 3
     }
   ],
-  "detected_clinical_columns": []
+  "patient_splits": {
+    "train_patients": 132,
+    "val_patients": 34,
+    "test_patients": 56
+  }
 }
