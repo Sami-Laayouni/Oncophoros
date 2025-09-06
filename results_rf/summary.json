@@ -1,0 +1,101 @@
+{
+  "metrics": {
+    "ROC-AUC": 0.9696969696969697,
+    "PR-AUC": 0.9791305219876647,
+    "F1": 0.9090909090909091,
+    "Accuracy": 0.9047619047619048,
+    "BestThreshold(F1)": 0.38709040294911307,
+    "Calibrated": true,
+    "Model": "RandomForest"
+  },
+  "class_counts_total": {
+    "1": 130,
+    "0": 120
+  },
+  "class_counts_after_filters": {
+    "1": 130,
+    "0": 120
+  },
+  "top_features": [
+    {
+      "feature": "MGLL",
+      "importance": 0.02022755321898608
+    },
+    {
+      "feature": "AFP",
+      "importance": 0.016332963294602182
+    },
+    {
+      "feature": "MT1M",
+      "importance": 0.014711309326391465
+    },
+    {
+      "feature": "HBB",
+      "importance": 0.014572051408096387
+    },
+    {
+      "feature": "GPC6",
+      "importance": 0.011658765289171164
+    },
+    {
+      "feature": "SNX7",
+      "importance": 0.009050216187529943
+    },
+    {
+      "feature": "METRN",
+      "importance": 0.00828844573668279
+    },
+    {
+      "feature": "ISLR",
+      "importance": 0.008085989320323738
+    },
+    {
+      "feature": "FTL",
+      "importance": 0.0077427103110847065
+    },
+    {
+      "feature": "ATP2B2",
+      "importance": 0.007559491019334939
+    },
+    {
+      "feature": "KLF15",
+      "importance": 0.00748668657227006
+    },
+    {
+      "feature": "PMEPA1",
+      "importance": 0.006439209410539131
+    },
+    {
+      "feature": "DCN",
+      "importance": 0.006408144308324301
+    },
+    {
+      "feature": "PEG10",
+      "importance": 0.006395549665420843
+    },
+    {
+      "feature": "MT1H",
+      "importance": 0.00581203855220122
+    },
+    {
+      "feature": "ST3GAL1",
+      "importance": 0.005455603685102411
+    },
+    {
+      "feature": "CDKN1C",
+      "importance": 0.005308263955280438
+    },
+    {
+      "feature": "TPX2",
+      "importance": 0.005262658222761493
+    },
+    {
+      "feature": "HMGA1",
+      "importance": 0.005239163768222346
+    },
+    {
+      "feature": "LRRC3",
+      "importance": 0.005049498619353583
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "metrics": {
+    "ROC-AUC": 0.9131313131313131,
+    "PR-AUC": 0.940894737843402,
+    "F1": 0.8571428571428571,
+    "Accuracy": 0.8571428571428571,
+    "BestThreshold(F1)": 0.4806732523347353,
+    "Calibrated": true
+  },
+  "class_counts_total": {
+    "1": 130,
+    "0": 120
+  },
+  "class_counts_after_filters": {
+    "1": 130,
+    "0": 120
+  },
+  "top_features": [
+    {
+      "feature": "ARHGEF16",
+      "abs_coeff": 0.2755883538988813
+    },
+    {
+      "feature": "PTK6",
+      "abs_coeff": 0.24896869827149934
+    },
+    {
+      "feature": "FCAMR",
+      "abs_coeff": 0.24882961035926304
+    },
+    {
+      "feature": "CCNE1",
+      "abs_coeff": 0.2115500915831953
+    },
+    {
+      "feature": "PHLDA1",
+      "abs_coeff": 0.19554169579262767
+    },
+    {
+      "feature": "ENTPD5",
+      "abs_coeff": 0.1865252518235335
+    },
+    {
+      "feature": "SYPL2",
+      "abs_coeff": 0.1794253700624198
+    },
+    {
+      "feature": "ACSM1",
+      "abs_coeff": 0.17154540036992383
+    },
+    {
+      "feature": "NCF2",
+      "abs_coeff": 0.17123843299621952
+    },
+    {
+      "feature": "F11",
+      "abs_coeff": 0.1690672285928838
+    },
+    {
+      "feature": "IRX3",
+      "abs_coeff": 0.16441901869098424
+    },
+    {
+      "feature": "ENPP3",
+      "abs_coeff": 0.16252493634619025
+    },
+    {
+      "feature": "TMOD1",
+      "abs_coeff": 0.1570787369794976
+    },
+    {
+      "feature": "ALDH1B1",
+      "abs_coeff": 0.1568318882433097
+    },
+    {
+      "feature": "ADH1C",
+      "abs_coeff": 0.15533146739952639
+    },
+    {
+      "feature": "SOAT2",
+      "abs_coeff": 0.15224632100645694
+    },
+    {
+      "feature": "PSAT1",
+      "abs_coeff": 0.15174500158724477
+    },
+    {
+      "feature": "HLA-DMA",
+      "abs_coeff": 0.14891742523420048
+    },
+    {
+      "feature": "TPX2",
+      "abs_coeff": 0.14695884236944562
+    },
+    {
+      "feature": "PLAAT2",
+      "abs_coeff": 0.14679393348851738
+    }
+  ]
+}

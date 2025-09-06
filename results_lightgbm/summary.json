@@ -1,0 +1,123 @@
+{
+  "metrics_expression_all": {
+    "ROC-AUC": 0.9525252525252524,
+    "PR-AUC": 0.972702094653314,
+    "F1": 0.9180327868852459,
+    "Accuracy": 0.9206349206349206,
+    "Precision": 1.0,
+    "Recall": 0.8484848484848485,
+    "BestThreshold(F1_on_val)": 0.8834302024619752,
+    "UsedEstimators": 98
+  },
+  "class_counts_total": {
+    "1": 130,
+    "0": 120
+  },
+  "class_counts_after_filters": {
+    "1": 130,
+    "0": 120
+  },
+  "top_features_expression_all": [
+    {
+      "feature": "ATP2B2",
+      "gain_importance": 737.8899502754211,
+      "split_importance": 48
+    },
+    {
+      "feature": "F11",
+      "gain_importance": 454.4056668281555,
+      "split_importance": 21
+    },
+    {
+      "feature": "AFP",
+      "gain_importance": 258.80734157562256,
+      "split_importance": 14
+    },
+    {
+      "feature": "MT1M",
+      "gain_importance": 248.95398950576782,
+      "split_importance": 9
+    },
+    {
+      "feature": "CFH",
+      "gain_importance": 101.07312965393066,
+      "split_importance": 8
+    },
+    {
+      "feature": "MGLL",
+      "gain_importance": 90.83930015563965,
+      "split_importance": 5
+    },
+    {
+      "feature": "CYP2D6",
+      "gain_importance": 81.38372993469238,
+      "split_importance": 9
+    },
+    {
+      "feature": "PLA2G12B",
+      "gain_importance": 54.4651420712471,
+      "split_importance": 7
+    },
+    {
+      "feature": "MCHR1",
+      "gain_importance": 50.7007999420166,
+      "split_importance": 4
+    },
+    {
+      "feature": "FMO4",
+      "gain_importance": 48.27388000488281,
+      "split_importance": 4
+    },
+    {
+      "feature": "HBB",
+      "gain_importance": 37.958460569381714,
+      "split_importance": 3
+    },
+    {
+      "feature": "ISLR",
+      "gain_importance": 30.389639854431152,
+      "split_importance": 4
+    },
+    {
+      "feature": "F7",
+      "gain_importance": 23.912790060043335,
+      "split_importance": 4
+    },
+    {
+      "feature": "CD7",
+      "gain_importance": 22.754759788513184,
+      "split_importance": 3
+    },
+    {
+      "feature": "KLF15",
+      "gain_importance": 20.770359992980957,
+      "split_importance": 2
+    },
+    {
+      "feature": "TNFRSF11B",
+      "gain_importance": 19.508630752563477,
+      "split_importance": 2
+    },
+    {
+      "feature": "ABCG8",
+      "gain_importance": 18.689260005950928,
+      "split_importance": 2
+    },
+    {
+      "feature": "MT1H",
+      "gain_importance": 15.546819686889648,
+      "split_importance": 2
+    },
+    {
+      "feature": "ZFP36L2",
+      "gain_importance": 14.929400444030762,
+      "split_importance": 1
+    },
+    {
+      "feature": "ABCG5",
+      "gain_importance": 14.622020244598389,
+      "split_importance": 2
+    }
+  ],
+  "detected_clinical_columns": []
+}
